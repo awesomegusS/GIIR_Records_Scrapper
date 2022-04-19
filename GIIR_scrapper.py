@@ -84,15 +84,21 @@ def scrape_data(lower='', upper=''):
     elif low: 
         df = df[(df.Published_Date >= low)] # filter
         
+    # convert date obj to str again
+    df.Published_Date = df.Published_Date.strftime('%B %d, %Y')
+    
     # SAVE TABLE AS CSV FILE
     df.to_csv('GIIR_records')
-    
+
     
 if '__main__' == __name__:
     print('Enter dates below | Enter q to quit')
     low = input('Low e.g. January 1, 2022: ')
     high = input('High e.g. January 1, 2022: ')
-
+    
+    if low == '' and high == '':
+        low, high = None, None
+        
     low = pd.to_datetime(low) 
     high = pd.to_datetime(high)
     scrape_data(low, high)
