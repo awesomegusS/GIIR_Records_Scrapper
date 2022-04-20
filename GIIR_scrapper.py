@@ -122,19 +122,19 @@ if '__main__' == __name__:
         print('Enter dates below | Enter q to quit')
         low = input('\tLow e.g. January 1, 2022: ')
         high = input('\tHigh e.g. January 1, 2022: ')
-        if low == '' and high == '':
-            low, high = (None, None)
+        if high == '':
+            high = None
+        if low == '':
+            low == None  
+        if low == 'q' or high == 'q':
             break
-        elif low == 'q' or high == 'q':
+        try:
+            low = pd.to_datetime(low) 
+            high = pd.to_datetime(high)
             break
-        else:
-            try:
-                low = pd.to_datetime(low) 
-                high = pd.to_datetime(high)
-                break
-            except:
-                print('Enter a correct date format')
-                continue
+        except:
+            print('Enter a correct date format')
+            continue
     scrape_data(low, high)
     print('GIIR csv file saved!')
     sys.exit()
