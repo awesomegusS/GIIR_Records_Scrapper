@@ -18,6 +18,7 @@ def get_input():
             low == None  
         if low == 'q' or high == 'q':
             break
+            sys.exit()
         try:
             low = pd.to_datetime(low) 
             high = pd.to_datetime(high)
