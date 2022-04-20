@@ -7,6 +7,26 @@ import numpy as np
 from pprint import PrettyPrinter
 import sys
 
+def get_input():
+    while True:
+        print('Enter dates below | Enter q to quit')
+        low = input('\tLow e.g. January 1, 2022: ')
+        high = input('\tHigh e.g. January 1, 2022: ')
+        if high == '':
+            high = None
+        if low == '':
+            low == None  
+        if low == 'q' or high == 'q':
+            break
+        try:
+            low = pd.to_datetime(low) 
+            high = pd.to_datetime(high)
+            break
+        except:
+            print('Enter a correct date format')
+            continue
+    return low, high
+    
 def scrape_data(lower=None, upper=None):
     # SCRAPE DATA
     browser = webdriver.Chrome()
@@ -118,23 +138,7 @@ def scrape_data(lower=None, upper=None):
     
     
 if '__main__' == __name__:
-    while True:
-        print('Enter dates below | Enter q to quit')
-        low = input('\tLow e.g. January 1, 2022: ')
-        high = input('\tHigh e.g. January 1, 2022: ')
-        if high == '':
-            high = None
-        if low == '':
-            low == None  
-        if low == 'q' or high == 'q':
-            break
-        try:
-            low = pd.to_datetime(low) 
-            high = pd.to_datetime(high)
-            break
-        except:
-            print('Enter a correct date format')
-            continue
+    low, high = get_input()
     scrape_data(low, high)
     print('GIIR csv file saved!')
     sys.exit()
