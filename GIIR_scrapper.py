@@ -1,3 +1,12 @@
+# IMPORT DEPENDENCIES
+from selenium import webdriver
+from selenium.common import exceptions
+from selenium.webdriver.common.by import By
+import pandas as pd
+import numpy as np
+from pprint import PrettyPrinter
+import sys
+
 def scrape_data(lower='', upper=''):
     # SCRAPE DATA
     browser = webdriver.Chrome()
